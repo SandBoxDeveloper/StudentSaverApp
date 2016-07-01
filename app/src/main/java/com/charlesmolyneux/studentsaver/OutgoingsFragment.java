@@ -1,6 +1,8 @@
 package com.charlesmolyneux.studentsaver;
 
+import android.app.DialogFragment;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -39,6 +42,7 @@ public class OutgoingsFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
     }
@@ -107,9 +111,23 @@ public class OutgoingsFragment extends Fragment {
                 resources.getStringArray(R.array.billPeriodStringArray));
         billPeriod.setAdapter(billPeriodStringArray);
 
+        Button setDateButton = (Button) view.findViewById(R.id.selectDateButton);
+        setDateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerFragment(v);
+            }
+        });
+
+
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    public void showDatePickerFragment(View v) {
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getActivity().getFragmentManager(), "datePicker");
     }
 
 

@@ -46,12 +46,11 @@ public class SummaryFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_summary, container, false);
 
 
-        expenseAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,tList);
+        expenseAdapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_list_item_1,tList);
 
 
         ListView expenseSummaryListView = (ListView) view.findViewById(R.id.expenseSummaryListView);
         expenseSummaryListView.setAdapter(expenseAdapter);
-        expenseAdapter.notifyDataSetChanged();
 
 
         // Inflate the layout for this fragment
