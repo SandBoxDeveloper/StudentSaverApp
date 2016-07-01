@@ -1,12 +1,18 @@
 package com.charlesmolyneux.studentsaver;
 
 import android.content.Context;
-import android.net.Uri;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 
 /**
@@ -38,12 +44,72 @@ public class OutgoingsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_add_expenditure, container, false);
+
+        Resources resources = getResources();
+
+        Spinner expenseCategory = (Spinner) view.findViewById(R.id.categoryEditText);
+        ArrayAdapter<String> expenseCatStringArray = new ArrayAdapter<>(getActivity(),
+                android.R.layout.simple_spinner_dropdown_item,
+                resources.getStringArray(R.array.category));
+        expenseCategory.setAdapter(expenseCatStringArray);
+
+
+        Spinner expenseOrIncome = (Spinner) view.findViewById(R.id.expenseOrIncomeEditText);
+        ArrayAdapter<String> costOrIncomeStringArray = new ArrayAdapter<>(getActivity(),
+                android.R.layout.simple_spinner_dropdown_item,
+                resources.getStringArray(R.array.expenseOrIncome));
+        expenseOrIncome.setAdapter(costOrIncomeStringArray);
+
+        final EditText inputAmount = (EditText) view.findViewById(R.id.expenseAmountEditText);
+        inputAmount.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+              /*  String amountStr = s.toString();
+                if (amountStr.endsWith("p")) {
+                    amountStr = amountStr.substring(0,amountStr.length()-1);
+                }
+                if (amountStr.startsWith("£")) {
+                    amountStr = amountStr.substring(1,amountStr.length());
+                }
+
+                inputAmount.removeTextChangedListener(this);
+
+                Double amount = Double.parseDouble(amountStr);
+                if ( amount >= .99) {
+                    amountStr = "£" + amountStr;
+                } else {
+                    amountStr = amountStr + "p";
+                }
+                inputAmount.setText(amountStr);
+                inputAmount.addTextChangedListener(this);
+*/
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+
+
+            }
+        }); //Work in Progress
+
+        Spinner billPeriod = (Spinner) view.findViewById(R.id.billPeriodSpinner);
+        ArrayAdapter<String> billPeriodStringArray = new ArrayAdapter<>(getActivity(),
+                android.R.layout.simple_spinner_dropdown_item,
+                resources.getStringArray(R.array.billPeriodStringArray));
+        billPeriod.setAdapter(billPeriodStringArray);
 
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_outgoings, container, false);
+        return view;
     }
 
 

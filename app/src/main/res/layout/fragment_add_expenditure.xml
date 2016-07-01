@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context="com.charlesmolyneux.studentsaver.OutgoingsFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <Spinner
+        android:id="@+id/categoryEditText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_below="@+id/expenseOrIncomeEditText"
+        android:spinnerMode="dropdown"
+        style="@android:style/Widget.Holo.Light.DropDownItem.Spinner"
+        android:prompt="@color/abc_color_highlight_material"
+        android:scrollIndicators="bottom"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:id="@+id/expenseOrIncomeEditText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="8dp"
+        android:spinnerMode="dropdown"
+        style="@android:style/Widget.Holo.Light.DropDownItem.Spinner"
+        android:prompt="@color/abc_color_highlight_material"
+        android:scrollIndicators="bottom"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/expenseAmountEditText"
+        android:hint="00.00"
+        android:textAlignment="center"
+        android:textSize="40sp"
+        android:layout_below="@+id/categoryEditText"
+        android:layout_marginRight="16sp"
+        android:layout_marginTop="16sp"
+        android:layout_marginBottom="16sp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="16dp"
+        android:textColor="#ae000000" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="16dp" />
+
+    <Spinner
+        style="@android:style/Widget.Holo.Light.DropDownItem.Spinner"
+        android:id="@+id/billPeriodSpinner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:spinnerMode="dropdown"
+        android:prompt="@color/abc_color_highlight_material"
+        android:scrollIndicators="bottom"
+        android:layout_below="@+id/expenseAmountEditText"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Amount (£)"
+        android:id="@+id/textView"
+        android:layout_below="@+id/categoryEditText"
+        android:layout_alignStart="@+id/categoryEditText"
+        android:layout_alignEnd="@+id/expenseAmountEditText"
+        android:textAlignment="center" />
+
+
+</RelativeLayout>

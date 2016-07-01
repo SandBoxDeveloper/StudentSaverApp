@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="category">
+        <item>Rent</item>
+        <item>Mortgage</item>
+        <item>Phone Bill</item>
+        <item>Food</item>
+        <item>Socialising</item>
+        <item>Sports</item>
+        <item>Activities</item>
+        <item>Transport</item>
+        <item>Job</item>
+        <item>Parents</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="expenseOrIncome">
+        <item>Income</item>
+        <item>Expense</item>
+    </string-array>
+    <string-array name="billPeriodStringArray">
+        <item>Daily</item>
+        <item>Weekly</item>
+        <item>Fortnightly</item>
+        <item>Monthly</item>
+        <item>One of Payment</item>
+
+
+    </string-array>
+</resources>
