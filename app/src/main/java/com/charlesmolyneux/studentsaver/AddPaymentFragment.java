@@ -1,9 +1,11 @@
 package com.charlesmolyneux.studentsaver;
 
+import android.app.DatePickerDialog;
 import android.app.DialogFragment;
+import android.content.ContentValues;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -12,30 +14,31 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link OutgoingsFragment.OnFragmentInteractionListener} interface
+ * {@link AddPaymentFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link OutgoingsFragment#newInstance} factory method to
+ * Use the {@link AddPaymentFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class OutgoingsFragment extends Fragment {
+public class AddPaymentFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public OutgoingsFragment() {
+    public AddPaymentFragment() {
         // Required empty public constructor
     }
 
-    public static OutgoingsFragment newInstance(String param1, String param2) {
-        OutgoingsFragment fragment = new OutgoingsFragment();
+    public static AddPaymentFragment newInstance(String param1, String param2) {
+        AddPaymentFragment fragment = new AddPaymentFragment();
 
         return fragment;
     }
@@ -54,14 +57,17 @@ public class OutgoingsFragment extends Fragment {
 
         Resources resources = getResources();
 
-        Spinner expenseCategory = (Spinner) view.findViewById(R.id.categoryEditText);
+        Button addPaymentButton = (Button) view.findViewById(R.id.addPaymentButton);
+        final TextView dateSelectedLabel = (TextView) view.findViewById(R.id.dateSelectedTextView);
+
+        final Spinner expenseCategory = (Spinner) view.findViewById(R.id.categoryEditText);
         ArrayAdapter<String> expenseCatStringArray = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_dropdown_item,
                 resources.getStringArray(R.array.category));
         expenseCategory.setAdapter(expenseCatStringArray);
 
 
-        Spinner expenseOrIncome = (Spinner) view.findViewById(R.id.expenseOrIncomeEditText);
+        final Spinner expenseOrIncome = (Spinner) view.findViewById(R.id.expenseOrIncomeEditText);
         ArrayAdapter<String> costOrIncomeStringArray = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_dropdown_item,
                 resources.getStringArray(R.array.expenseOrIncome));
@@ -105,7 +111,7 @@ public class OutgoingsFragment extends Fragment {
             }
         }); //Work in Progress
 
-        Spinner billPeriod = (Spinner) view.findViewById(R.id.billPeriodSpinner);
+        final Spinner billPeriod = (Spinner) view.findViewById(R.id.billPeriodSpinner);
         ArrayAdapter<String> billPeriodStringArray = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_dropdown_item,
                 resources.getStringArray(R.array.billPeriodStringArray));
@@ -119,7 +125,34 @@ public class OutgoingsFragment extends Fragment {
             }
         });
 
+        addPaymentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SQLiteDB_PaymentSaving mDbHelper = new SQLiteDB_PaymentSaving(getActivity());
 
+
+                String pType = expenseOrIncome.getSelectedItem().toString();
+                String pCat = expenseCategory.getSelectedItem().toString();
+                String pAmount = inputAmount.getText().toString();
+                String pOccurs = billPeriod.getSelectedItem().toString();
+                String pDate = dateSelectedLabel.getText().toString();
+
+                // Gets the data repository in write mode
+                SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+                // Create a new map of values, where column names are the keys
+                ContentValues values = new ContentValues();
+                values.put(SQLiteDB_PaymentSaving.PAYMENT_TYPE, pType);
+                values.put(SQLiteDB_PaymentSaving.PAYMENT_CATEGORY, pCat);
+                values.put(SQLiteDB_PaymentSaving.PAYMENT_AMOUNT, pAmount);
+                values.put(SQLiteDB_PaymentSaving.PAYMENT_OCCURS, pOccurs);
+                values.put(SQLiteDB_PaymentSaving.PAYMENT_DATE, pDate);
+
+               //True is successfully inserted into the SQLite DB.
+               boolean t =  mDbHelper.insertPayment(pType,pCat,pAmount,pOccurs,pDate);
+
+            }
+        });
 
         // Inflate the layout for this fragment
         return view;
@@ -147,6 +180,8 @@ public class OutgoingsFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
+
 
     public interface OnFragmentInteractionListener {
     }

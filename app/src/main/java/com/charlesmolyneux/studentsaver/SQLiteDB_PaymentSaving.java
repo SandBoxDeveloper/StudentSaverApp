@@ -1,3 +1,5 @@
+package com.charlesmolyneux.studentsaver;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -12,7 +14,7 @@ public class SQLiteDB_PaymentSaving extends SQLiteOpenHelper {
 
     // If you change the database schema, you must increment the database version.
     public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "StudentSaverPayments.db";
+    public static final String DATABASE_NAME = "StudentSaverPayments";
 
     public static final String PAYMENT_TYPE = "p_PaymentType";
     public static final String PAYMENT_CATEGORY = "p_PaymentCategory";
@@ -25,8 +27,8 @@ public class SQLiteDB_PaymentSaving extends SQLiteOpenHelper {
     }
     public void onCreate(SQLiteDatabase db) {
         String SQL_CREATE_ENTRIES = "CREATE TABLE " + DATABASE_NAME +
-                "(id integer primary key, " +
-                PAYMENT_TYPE + "text, " +
+                " (id integer primary key AUTOINCREMENT, " +
+                PAYMENT_TYPE + " text, " +
                 PAYMENT_CATEGORY + " text, " +
                 PAYMENT_AMOUNT + " text, " +
                 PAYMENT_OCCURS + " text, " +
@@ -35,7 +37,7 @@ public class SQLiteDB_PaymentSaving extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_ENTRIES);
     }
 
-    public boolean insertPayment  (String payType, String payCategoy, String payAmount, String payReoccurs,String payDate) {
+    public boolean insertPayment (String payType, String payCategoy, String payAmount, String payReoccurs,String payDate) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(PAYMENT_TYPE, payType);
@@ -43,7 +45,7 @@ public class SQLiteDB_PaymentSaving extends SQLiteOpenHelper {
         contentValues.put(PAYMENT_AMOUNT, payAmount);
         contentValues.put(PAYMENT_OCCURS, payReoccurs);
         contentValues.put(PAYMENT_DATE, payDate);
-        db.insert("contacts", null, contentValues);
+        db.insert(DATABASE_NAME, null, contentValues);
         return true;
     }
 

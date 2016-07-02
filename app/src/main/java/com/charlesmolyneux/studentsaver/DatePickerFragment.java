@@ -1,11 +1,14 @@
 package com.charlesmolyneux.studentsaver;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.widget.DatePicker;
+import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class DatePickerFragment extends DialogFragment
@@ -24,6 +27,14 @@ public class DatePickerFragment extends DialogFragment
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        // Do something with the date chosen by the user
+        Calendar c = Calendar.getInstance();
+        c.set(year, month, day);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        String formattedDate = sdf.format(c.getTime());
+        TextView dateSelectedLabel = (TextView) getActivity().findViewById(R.id.dateSelectedTextView);
+        dateSelectedLabel.setText(formattedDate);
+
     }
+
 }

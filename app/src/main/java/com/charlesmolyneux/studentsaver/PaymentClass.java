@@ -1,3 +1,5 @@
+package com.charlesmolyneux.studentsaver;
+
 import java.util.Date;
 
 /**
