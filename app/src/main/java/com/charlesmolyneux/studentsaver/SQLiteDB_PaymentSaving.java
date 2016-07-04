@@ -7,6 +7,8 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+
 /**
  * Created by charlesmolyneux on 02/07/2016.
  */
@@ -62,6 +64,30 @@ public class SQLiteDB_PaymentSaving extends SQLiteOpenHelper {
         return numRows;
     }
 
+    public ArrayList<PaymentClass> getAllCotacts()
+    {
+        ArrayList<PaymentClass> array_list = new ArrayList<>();
+
+        //hp = new HashMap();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from " + DATABASE_NAME, null );
+        res.moveToFirst();
+
+        while(!res.isAfterLast()){
+            String col1; String col2; String col3; String col4; String col5;
+            col1 = res.getString(res.getColumnIndex(PAYMENT_TYPE));
+            col2 = res.getString(res.getColumnIndex(PAYMENT_CATEGORY));
+            col3 = res.getString(res.getColumnIndex(PAYMENT_AMOUNT));
+            col4 = res.getString(res.getColumnIndex(PAYMENT_OCCURS));
+            col5 = res.getString(res.getColumnIndex(PAYMENT_DATE));
+
+            PaymentClass paymentClass = new PaymentClass(col1,col2,col3,col4,col5);
+            array_list.add(paymentClass);
+
+            res.moveToNext();
+        }
+        return array_list;
+    }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // This database is only a cache for online data, so its upgrade policy is

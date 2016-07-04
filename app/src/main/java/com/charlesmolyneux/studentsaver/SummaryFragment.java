@@ -20,7 +20,7 @@ public class SummaryFragment extends Fragment {
 
 
     private OnSummaryFragmentInterface mListener;
-    private ArrayAdapter<String> expenseAdapter;
+    private ArrayList<PaymentClass> paymentClasses;
 
     public SummaryFragment() {
         // Required empty public constructor
@@ -34,8 +34,6 @@ public class SummaryFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        tList.add("£1800 - Pay\nJuly 15");
-        tList.add("-£550 - Rent\nJuly 23");
         super.onCreate(savedInstanceState);
 
     }
@@ -45,13 +43,16 @@ public class SummaryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_summary, container, false);
 
+        SQLiteDB_PaymentSaving mDbHelper = new SQLiteDB_PaymentSaving(getActivity());
 
-        expenseAdapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_list_item_1,tList);
+        if (mDbHelper.numberOfRows() > 0) {
+            paymentClasses = mDbHelper.getAllCotacts();
 
+            //expenseAdapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_list_item_1,tList);
 
-        ListView expenseSummaryListView = (ListView) view.findViewById(R.id.expenseSummaryListView);
-        expenseSummaryListView.setAdapter(expenseAdapter);
-
+            ListView expenseSummaryListView = (ListView) view.findViewById(R.id.expenseSummaryListView);
+            expenseSummaryListView.setAdapter(new PaymentListViewAdapter(getActivity(), paymentClasses));
+        }
 
         // Inflate the layout for this fragment
         return view;

@@ -1,5 +1,7 @@
 package com.charlesmolyneux.studentsaver;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,8 +19,10 @@ public class MainActivity extends AppCompatActivity implements AddPaymentFragmen
 
         FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.manageBudgetFloatingButton);
 
-        final SummaryFragment summaryFragment = new SummaryFragment();
-        getSupportFragmentManager().beginTransaction().add(summaryFragment,sumTag).commit();
+        if(savedInstanceState == null) {
+            SummaryFragment summaryFragment = new SummaryFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragement_container,summaryFragment,sumTag).commit();
+        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -29,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements AddPaymentFragmen
                 @Override
                 public void onClick(View v) {
                     AddPaymentFragment outgoingsFragment = new AddPaymentFragment();
+                    SummaryFragment summaryFragment = new SummaryFragment();
+
                     AddPaymentFragment outFrag = (AddPaymentFragment) getSupportFragmentManager().findFragmentByTag(tag);
 
                     if (outFrag != null) {

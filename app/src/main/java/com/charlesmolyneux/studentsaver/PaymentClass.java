@@ -8,14 +8,14 @@ import java.util.Date;
 public class PaymentClass {
     private String paymentType;
     private String paymentCategory;
-    private Float paymentAmound;
+    private String paymentAmount;
     private String paymentReoccurment;
-    private Date paymentDate;
+    private String paymentDate;
 
-    public PaymentClass(String paymentType, String paymentCategory, Float paymentAmound, String paymentReoccurment, Date paymentDate) {
+    public PaymentClass(String paymentType, String paymentCategory, String paymentAmound, String paymentReoccurment, String paymentDate) {
         this.paymentType = paymentType;
         this.paymentCategory = paymentCategory;
-        this.paymentAmound = paymentAmound;
+        this.paymentAmount = paymentAmound;
         this.paymentReoccurment = paymentReoccurment;
         this.paymentDate = paymentDate;
     }
@@ -37,19 +37,19 @@ public class PaymentClass {
         this.paymentCategory = paymentCategory;
     }
 
-    public Float getPaymentAmound() {
-        return paymentAmound;
+    public String getPaymentAmount() {
+        return paymentAmount;
     }
 
-    public void setPaymentAmound(Float paymentAmound) {
-        this.paymentAmound = paymentAmound;
+    public void setPaymentAmount(String paymentAmound) {
+        this.paymentAmount = paymentAmound;
     }
 
-    public Date getPaymentDate() {
+    public String getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(Date paymentDate) {
+    public void setPaymentDate(String paymentDate) {
         this.paymentDate = paymentDate;
     }
 

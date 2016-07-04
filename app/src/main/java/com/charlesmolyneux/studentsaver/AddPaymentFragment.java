@@ -130,7 +130,6 @@ public class AddPaymentFragment extends Fragment {
             public void onClick(View v) {
                 SQLiteDB_PaymentSaving mDbHelper = new SQLiteDB_PaymentSaving(getActivity());
 
-
                 String pType = expenseOrIncome.getSelectedItem().toString();
                 String pCat = expenseCategory.getSelectedItem().toString();
                 String pAmount = inputAmount.getText().toString();
