@@ -21,6 +21,7 @@ public class PaymentClass {
     }
 
 
+    //Payment Name (Identifies payment)
     public String getPaymentType() {
         return paymentType;
     }
@@ -29,6 +30,7 @@ public class PaymentClass {
         this.paymentType = paymentType;
     }
 
+    //Expense or Income?
     public String getPaymentCategory() {
         return paymentCategory;
     }

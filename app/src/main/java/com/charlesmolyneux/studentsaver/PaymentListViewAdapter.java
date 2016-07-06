@@ -11,6 +11,7 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Created by charlesmolyneux on 04/07/2016.
@@ -18,14 +19,12 @@ import java.util.ArrayList;
 public class PaymentListViewAdapter extends BaseAdapter {
     ArrayList<PaymentClass> paymentClass;
 
-
     Context context;
 
     private static LayoutInflater inflater=null;
 
     public PaymentListViewAdapter(Context context, ArrayList<PaymentClass> payment) {
         paymentClass = payment;
-
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -56,15 +55,24 @@ public class PaymentListViewAdapter extends BaseAdapter {
         View rowView;
         rowView = inflater.inflate(R.layout.payments_list, null);
 
-        holder.paymentLabel = (TextView) rowView.findViewById(R.id.payment_label_tv);
-        holder.paymentAmountLabel = (TextView) rowView.findViewById(R.id.payment_amount_tv);
-        holder.paymentCategoryImage = (ImageView) rowView.findViewById(R.id.p_category_iv);
+            holder.paymentLabel = (TextView) rowView.findViewById(R.id.payment_label_tv);
+            holder.paymentAmountLabel = (TextView) rowView.findViewById(R.id.payment_amount_tv);
+            holder.paymentCategoryImage = (ImageView) rowView.findViewById(R.id.p_category_iv);
 
-        holder.paymentLabel.setText(paymentClass.get(0).getPaymentType());
-        holder.paymentAmountLabel.setText(paymentClass.get(0).getPaymentAmount());
+            holder.paymentLabel.setText(paymentClass.get(position).getPaymentCategory());
 
-        holder.paymentCategoryImage.setImageResource(R.drawable.pay_day_image);
+             String amount = paymentClass.get(position).getPaymentType();
+            if (Objects.equals(amount, "Expense")) {
+                holder.paymentAmountLabel.setText("-£" + paymentClass.get(position).getPaymentAmount());
+             //   holder.paymentAmountLabel.setTextColor(context.getResources().getColor(android.R.color.holo_red_dark));
+            } else {
+                holder.paymentAmountLabel.setText(" £" + paymentClass.get(position).getPaymentAmount());
+             //   holder.paymentAmountLabel.setTextColor(context.getResources().getColor(android.R.color.holo_green_light));
 
+            }
+
+
+            holder.paymentCategoryImage.setImageResource(R.drawable.pay_day_image);
 
         return rowView;
 

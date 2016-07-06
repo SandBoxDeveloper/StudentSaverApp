@@ -2,6 +2,7 @@ package com.charlesmolyneux.studentsaver;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +18,7 @@ public class MainActivity extends AppCompatActivity implements AddPaymentFragmen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.manageBudgetFloatingButton);
+        final FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.manageBudgetFloatingButton);
 
         if(savedInstanceState == null) {
             SummaryFragment summaryFragment = new SummaryFragment();
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements AddPaymentFragmen
                     }
                     else {
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragement_container,outgoingsFragment,tag).commit();
+
                     }
 
 

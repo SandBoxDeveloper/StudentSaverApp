@@ -9,5 +9,93 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/expenseSummaryListView"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_below="@+id/linearLayout"
+        android:layout_marginTop="4dp" />
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout"
+        android:layout_alignEnd="@+id/expenseSummaryListView"
+        android:layout_alignStart="@+id/expenseSummaryListView"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:text="Monthly Expenditure"
+            android:id="@+id/totalOutgoingsTextView"
+            android:layout_marginRight="4dp"
+            android:layout_below="@+id/totalIncomeTextview"
+            android:layout_alignParentStart="true"
+            android:textAlignment="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:text="Monthly Income "
+            android:id="@+id/totalIncomeTextview"
+            android:layout_marginRight="4dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:textAlignment="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:text="Budget Remaining"
+            android:id="@+id/budgetTextview"
+            android:layout_marginRight="4dp"
+            android:layout_below="@+id/totalOutgoingsTextView"
+            android:layout_alignParentStart="true"
+            android:textAlignment="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="£1800"
+            android:id="@+id/textView2"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/totalOutgoingsTextView"
+            android:textColor="@color/accent_material_light"
+            android:textAlignment="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="£250"
+            android:id="@+id/textView3"
+            android:layout_below="@+id/textView2"
+            android:layout_alignEnd="@+id/textView2"
+            android:layout_toEndOf="@+id/totalOutgoingsTextView"
+            android:textColor="@android:color/holo_red_light"
+            android:textAlignment="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="£1550"
+            android:id="@+id/textView4"
+            android:layout_below="@+id/textView3"
+            android:layout_alignParentEnd="true"
+            android:layout_alignStart="@+id/textView3"
+            android:textColor="@color/accent_material_light"
+            android:textAlignment="center"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
 </RelativeLayout>
